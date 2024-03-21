@@ -4,19 +4,14 @@ using UnityEngine;
 
 public class Archer : Villager
 {
-    public GameObject ArrowPrefab;
-    public Transform SpawnPoint;
-    public float delay = 0.25f;
+    public GameObject arrowPrefab;
+    public Transform spawnPoint;
 
     protected override void Attack()
     {
         destination = transform.position;
         base.Attack();
-        Invoke("SpawnArrow", delay);
-    }
-    void SpawnArrow()
-    {
-        Instantiate(ArrowPrefab, SpawnPoint.position, SpawnPoint.rotation);
+        Instantiate(arrowPrefab, spawnPoint.position, spawnPoint.rotation);
     }
 
     public override ChestType CanOpen()
