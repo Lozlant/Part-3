@@ -29,11 +29,11 @@ public class Villager : MonoBehaviour
         highlight.SetActive(isSelected);
     }
 
-    private void OnMouseDown()
+    /*private void OnMouseDown()
     {
         CharacterControl.SetSelectedVillager(this);
         clickingOnSelf = true;
-    }
+    }*/
 
     private void OnMouseUp()
     {
@@ -67,7 +67,7 @@ public class Villager : MonoBehaviour
     protected virtual void Update()
     {
         //left click: move to the click location
-        if (Input.GetMouseButtonDown(0) && isSelected && !clickingOnSelf)
+        if (Input.GetMouseButtonDown(0) && isSelected && !clickingOnSelf && !EventSystem.current.IsPointerOverGameObject())
         {
             destination = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
@@ -75,7 +75,7 @@ public class Villager : MonoBehaviour
         animator.SetFloat("Movement", movement.magnitude);
 
         //right click to attack
-        if (Input.GetMouseButtonDown(1) && isSelected)
+        if (Input.GetMouseButtonDown(1) && isSelected && !EventSystem.current.IsPointerOverGameObject())
         {
             Attack();
         }
