@@ -11,6 +11,7 @@ public class CharacterControl : MonoBehaviour
     public static CharacterControl Instance;
     public TMP_Dropdown dropdown;
     public Villager[] villagers=new Villager[3];
+    public Slider slider;
 
     private void Start()
     {
@@ -31,12 +32,18 @@ public class CharacterControl : MonoBehaviour
     public void ChooseVillager(int value)
     {
         SetSelectedVillager(villagers[value]);
+        slider.value = SelectedVillager.transform.localScale.x;
     }
 
     IEnumerator startchoose()
     {
         yield return 0;
         ChooseVillager(0);
+    }
+
+    public void ChangeScale(float value)
+    {
+        SelectedVillager.transform.localScale = Vector3.one*value;
     }
     /*private void Update()
     {
