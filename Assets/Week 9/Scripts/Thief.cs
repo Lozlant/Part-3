@@ -16,8 +16,6 @@ public class Thief : Villager
             StopCoroutine(dashing);
         }
         dashing = StartCoroutine(Dash());
-
-
     }
     IEnumerator Dash()
     {
