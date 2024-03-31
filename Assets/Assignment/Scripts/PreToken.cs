@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class PreToken : MonoBehaviour
 {
@@ -9,7 +8,7 @@ public class PreToken : MonoBehaviour
     void Update()
     {
         transform.position =Input.mousePosition;
-        if(Input.GetMouseButtonDown(0) && EventSystem.current.IsPointerOverGameObject())
+        if(Input.GetMouseButtonDown(0) && Camera.main.ScreenToViewportPoint(Input.mousePosition).x<=0.5)
         {
             GameController.setSpawnToken(Tokenprefab);
             Destroy(gameObject);

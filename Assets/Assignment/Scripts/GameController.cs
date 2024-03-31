@@ -6,6 +6,8 @@ public class GameController : MonoBehaviour
 {
     public static Vector2[] towerposition { get; private set; } = new Vector2[2];
     public static GameObject SpawnToken { get; private set; }
+
+    public static Type winner { get; private set; }
     public static void setTowerPosition(Type type,Vector2 position)
     {
         towerposition[(int)type] = position;
@@ -13,6 +15,10 @@ public class GameController : MonoBehaviour
     public static void setSpawnToken(GameObject prefab)
     {
         SpawnToken = prefab;
+    }
+    public static void setWinner(Type type)
+    {
+        winner=type;
     }
 
 

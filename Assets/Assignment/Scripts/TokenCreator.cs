@@ -29,8 +29,8 @@ public class TokenCreator : MonoBehaviour
     IEnumerator SpawnEnemy()
     {
         while (true){ 
-        Instantiate(EnemyPrefab);
-        yield return new WaitForSeconds(spawnInterval);
+            Instantiate(EnemyPrefab);
+            yield return new WaitForSeconds(spawnInterval);
         }
     }
 }
