@@ -18,6 +18,7 @@ public class DefenseTower : Entity
     protected override IEnumerator Dead()
     {
         isDying = true;
+        if (attacking != null) StopCoroutine(attacking);
         float timer = 0;
         while (timer < 1f)
         {

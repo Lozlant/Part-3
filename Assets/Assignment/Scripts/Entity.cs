@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Versioning;
 using UnityEngine;
 using UnityEngine.UI;
 public enum Type { enemy, player}
@@ -17,7 +18,9 @@ public class Entity : MonoBehaviour
     protected Rigidbody2D rb;
     Coroutine dying;
     public bool isDying = false;
-    Coroutine attacking;
+    protected Coroutine attacking;
+
+    List<GameObject> targets= new List<GameObject>();
 
     protected virtual void Start()
     {
@@ -42,23 +45,42 @@ public class Entity : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (attacking == null && !collision.CompareTag("Bullet") && !collision.CompareTag("GameController"))
+        if(!collision.CompareTag("Bullet") && !collision.CompareTag("GameController"))
         {
-            Vector3 movement = collision.gameObject.transform.position - BulletSpawnPoint.position;
-            attacking = StartCoroutine(Attack(collision.gameObject, movement));
+            //Debug.Log(gameObject.name+" add " + collision.gameObject);
+            targets.Add(collision.gameObject);
+            if (attacking == null)
+            {
+                Vector3 movement = targets[0].transform.position - BulletSpawnPoint.position;
+                attacking = StartCoroutine(Attack(targets[0], movement));
+            }
         }
     }
     protected virtual IEnumerator Attack(GameObject target, Vector3 movement)
     {
         if (target.TryGetComponent<Entity>(out Entity entity))
         {
-            while (!entity.isDying)
+            while (entity != null && !entity.isDying)
             {
                 GameObject bullet = Instantiate(BulletPrefab, BulletSpawnPoint.position, BulletSpawnPoint.rotation);
                 bullet.GetComponent<bullet>().SetDirection(entity, movement);
                 yield return new WaitForSeconds(shootingInterval);
             }
+            for (int i = 0; i < targets.Count; i++)
+            {
+                if (targets[i]==null || targets[i].GetComponent<Entity>().isDying)
+                {
+                    targets.Remove(target);
+                    i--;
+                }
+            }
+            if (targets.Count>0)
+            {
+                movement = targets[0].transform.position - BulletSpawnPoint.position;
+               StartCoroutine(Attack(targets[0], movement));
+            }
         }
         attacking = null;
     }
+
 }

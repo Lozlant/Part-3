@@ -45,11 +45,13 @@ public class Token : Entity
         currentspeed = 0;
         yield return base.Attack(target,movement);
         currentspeed=speed;
+        attacking = null;
     }
 
     protected override IEnumerator Dead()
     {
         isDying = true;
+        if (attacking != null) StopCoroutine(attacking);
         currentspeed = 0;
         float timer = 0;
         while (timer < 2f)
@@ -59,6 +61,7 @@ public class Token : Entity
             transform.rotation = Quaternion.Lerp(Quaternion.identity, Quaternion.Euler(0f, 0f, 90f), interpolation);
             yield return null;
         }
+        if (type == Type.enemy) GameController.setMoney(GameController.money + 100);
         Destroy(gameObject);
     }
 }

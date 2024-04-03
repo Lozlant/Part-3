@@ -402,6 +402,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 7141787483352919181}
   maxhealth: 10
+  BulletPrefab: {fileID: 2267573272003465136, guid: 5560278d1ee84064a9ea49f6ee12d478, type: 3}
+  BulletSpawnPoint: {fileID: 886046748630081782}
+  shootingInterval: 1
   dyingCurve:
     serializedVersion: 2
     m_Curve:
@@ -426,12 +429,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  isdying: 0
+  isDying: 0
   type: 1
   speed: 0.6
-  BulletPrefab: {fileID: 2267573272003465136, guid: 5560278d1ee84064a9ea49f6ee12d478, type: 3}
-  BulletSpawnPoint: {fileID: 886046748630081782}
-  shootingInterval: 1
 --- !u!1 &6294499966526267204
 GameObject:
   m_ObjectHideFlags: 0

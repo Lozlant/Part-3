@@ -89,3 +89,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Tokenprefab: {fileID: 5072383500721473631, guid: 679f0d4cef9a0a74596a2df7119afcd4, type: 3}
+  price: 200
